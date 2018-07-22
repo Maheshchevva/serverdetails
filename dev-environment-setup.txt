@@ -1,0 +1,8 @@
+Dev Environment:
+
+Server Specifications:
+To Implement "My Server Details	Submission" in Drupal 8, used LAMP Stack.
+
+Used below command line tools:
+Composer: Used to manage core dependencies like Symfony components and Guzzle.
+Drush: Used the Drush to enable the module.
