@@ -1,0 +1,13 @@
+my_server_upload.my_server:
+  path: '/my-server'
+  defaults:
+    _controller: '\Drupal\my_server_upload\Controller\MyServerUploadController::FormDisplay'
+  requirements:
+    _permission: 'access my server'
+my_server_upload.server_config_form:
+  path: '/admin/config/server-config'
+  defaults:
+    _form: '\Drupal\my_server_upload\Form\ServerConfigForm'
+    _title: 'Server Settings'
+  requirements:
+    _permission: 'administer site configuration'

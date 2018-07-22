@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the My Server Upload module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function my_server_upload_schema() {
+  $schema['server_information'] = [
+    'description' => 'Stores Server Information.',
+    'fields' => [
+      'id' => [
+        'description' => 'Unique ID for Server Information.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+	  'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'The {users}.uid for this set.',
+      ],
+      'server_name' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'The name of the server',
+      ],
+	  'server_username' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'description' => 'The username of the server',
+      ],
+	  'server_password' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'description' => 'The password of the server',
+      ],
+	  'server_type' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'The type of the server',
+      ],
+	  'windows_version' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'Windows version',
+      ],
+	  'linux_version' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'Linux version',
+      ],
+	  'server_other_flag' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The server type flag',
+      ],
+	  'ip_address' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'The server IP Address',
+      ],
+	  'fqdm' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'The server fqdm',
+      ],
+    ],
+    'primary key' => ['id', 'server_name'],
+	'unique keys' => [
+      'server_name' => array('server_name'),
+    ],
+  ];
+  
+  $schema['server_maintainer'] = [
+    'description' => 'Stores Server Maintainer',
+    'fields' => [
+      'id' => [
+        'description' => 'Unique ID for Server Maintainer.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+	  'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0,
+        'description' => 'The {users}.uid for this set.',
+      ],
+      'server_admin' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'Admin name of the server',
+      ],
+	  'server_name' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'The name of the server',
+      ],
+	  'server_admin_mail' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'Server admin mail',
+      ],
+	  'server_admin_since' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Server admin since',
+      ],
+	  'server_notes' => [
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+        'description' => 'Server notes',
+      ],
+	  'updated' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['id', 'server_admin'],
+	'foreign keys' => [
+      'set_server_name' => [
+        'table' => 'server_information',
+        'columns' => ['server_name' => 'server_name'],
+      ],
+    ],
+	
+  ];
+  return $schema;
+}

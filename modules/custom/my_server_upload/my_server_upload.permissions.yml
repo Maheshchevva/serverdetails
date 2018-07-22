@@ -1,0 +1,4 @@
+access my server:
+  title: 'My server page'
+  description: 'A custom permission for access my server page.'
+  restrict access: TRUE
