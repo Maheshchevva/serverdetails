@@ -11,3 +11,9 @@ my_server_upload.server_config_form:
     _title: 'Server Settings'
   requirements:
     _permission: 'administer site configuration'
+my_server_upload.server_details:
+  path: '/server-details-list'
+  defaults:
+    _controller: '\Drupal\my_server_upload\Controller\MyServerUploadController::ServerDetailsList'
+  requirements:
+    _permission: 'access content'
