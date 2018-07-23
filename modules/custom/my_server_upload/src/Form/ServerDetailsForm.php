@@ -199,6 +199,38 @@ class ServerDetailsForm extends FormBase {
     $id = \Drupal::currentUser()->id();
     if($id) {
       try {
+        $connection->merge('server_information')
+		  ->key(['uid' => $id])
+          ->fields([
+          'server_name' => $vals['server_name'],
+		  'server_username' => $vals['server_username'],
+		  'server_password' => $vals['server_password'],
+          'server_type' => $vals['server_type'],
+		  'windows_version' => $vals['windows_version'],
+		  'linux_version' => $vals['linux_version'],
+          'server_other_flag' => $flag,
+          'ip_address' => $vals['ip_address'],
+          'fqdm' => $vals['fqdm'],
+        ])
+        ->execute();
+        $connection->merge('server_maintainer')
+		->key(['uid' => $id])
+        ->fields([
+          'server_admin' => $vals['server_admin'],
+          'server_name' => $vals['server_name'],
+          'server_admin_mail' => $vals['server_admin_email'],
+          'server_admin_since' => strtotime($vals['admin_since']),
+          'server_notes' => $vals['server_notes'],
+		  'updated' => time(),
+        ])
+        ->execute();
+      }
+      catch (\Exception $e) {
+        throw $e;
+      }
+	}
+	else {
+      try {
         $connection->insert('server_information')
           ->fields([
           'server_name' => $vals['server_name'],
@@ -219,7 +251,6 @@ class ServerDetailsForm extends FormBase {
           'server_admin_mail' => $vals['server_admin_email'],
           'server_admin_since' => strtotime($vals['admin_since']),
           'server_notes' => $vals['server_notes'],
-		  'uid' => $id,
 		  'updated' => time(),
         ])
         ->execute();
@@ -227,7 +258,7 @@ class ServerDetailsForm extends FormBase {
       catch (\Exception $e) {
         throw $e;
       }
-	}
+    }
 	drupal_set_message("Server Upload Form Submitted");
 	$form_state->setRedirect('<front>');
   }
