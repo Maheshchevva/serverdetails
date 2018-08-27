@@ -1,6 +1,6 @@
 Modules extend your site functionality beyond Drupal core.
 
-WHAT TO PLACE IN THIS DIRECTORY?
+WHAT TO PLACE IN THIS DIRECTORY?    
 --------------------------------
 
 Placing downloaded and custom modules in this directory separates downloaded and
