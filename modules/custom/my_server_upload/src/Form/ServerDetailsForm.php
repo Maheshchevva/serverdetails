@@ -22,7 +22,6 @@ class ServerDetailsForm extends FormBase {
 	$email = $uid ? $current_user->getEmail() : '';
 	$name = $uid ? $current_user->getAccountName() : '';
     $roles = $current_user->getRoles();
-	
 	if($uid) {
       $connection = Database::getConnection();
       $server_info = $connection->select('server_information', 'si')
